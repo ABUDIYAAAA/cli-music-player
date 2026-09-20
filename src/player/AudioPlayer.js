@@ -194,11 +194,8 @@ export class AudioPlayer extends EventEmitter {
     this.volume = Math.max(MIN_VOLUME, Math.min(MAX_VOLUME, Math.round(newVolume)));
     this.emit('volumeChange', this.volume);
 
-    // Real-time macOS volume adjustment via osascript
-    try {
-      execFile('osascript', ['-e', `set volume output volume ${this.volume}`], () => {});
-    } catch (err) {
-      // Ignore if osascript unavailable
+    if (this.currentSong && this.state !== PlaybackState.STOPPED) {
+      this._spawnPlayerProcess(this.currentPosition);
     }
   }
 
