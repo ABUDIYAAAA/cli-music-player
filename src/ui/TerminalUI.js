@@ -69,13 +69,13 @@ export class TerminalUI {
       shuffleEnabled: state.shuffleEnabled,
       repeatMode: state.repeatMode,
       notification: state.notification,
-      isSearching: state.isSearching,
-      searchQuery: state.searchQuery
+      promptLabel: state.promptLabel,
+      inputBuffer: state.inputBuffer
     }, width));
 
     // Help Bar
     lines.push(...HelpBar.render({
-      isSearching: state.isSearching
+      promptHelp: state.promptHelp
     }, width));
 
     const fullBuffer = lines.map((line) => line + '\x1b[K').join('\n');

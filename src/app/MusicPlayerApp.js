@@ -127,6 +127,25 @@ export class MusicPlayerApp {
       subTitle = `Search: "${this.searchQuery}"`;
     }
 
+    let promptLabel = '';
+    let promptHelp = '';
+
+    if (this.keyboard.isInputMode) {
+      if (
+        this.promptAction === 'CREATE_PLAYLIST' ||
+        this.promptAction === 'CREATE_PLAYLIST_AND_ADD'
+      ) {
+        promptLabel = 'Playlist Name';
+        promptHelp = 'Type new playlist name';
+      } else if (this.promptAction === 'CHANGE_DIRECTORY') {
+        promptLabel = 'Directory Path';
+        promptHelp = 'Type directory path';
+      } else {
+        promptLabel = 'Search';
+        promptHelp = 'Type search query';
+      }
+    }
+
     this.ui.render({
       activeView: this.activeView,
       totalSongs: this.library.count,
@@ -142,8 +161,9 @@ export class MusicPlayerApp {
       shuffleEnabled: this.shuffleEnabled,
       repeatMode: this.repeatMode,
       notification: this.notification,
-      isSearching: this.keyboard.isInputMode,
-      searchQuery: this.keyboard.inputBuffer
+      promptLabel,
+      promptHelp,
+      inputBuffer: this.keyboard.inputBuffer
     });
   }
 

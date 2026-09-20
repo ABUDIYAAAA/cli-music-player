@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/AudioPlayer.test.js test/FileScanner.test.js test/KeyboardController.test.js test/MusicLibrary.test.js test/MusicPlayerApp.test.js test/PlaybackHistory.test.js test/PlaybackState.test.js test/PlaylistManager.test.js test/Song.test.js test/formatTime.test.js test/shuffle.test.js"
   },
   "repository": {
     "type": "git",

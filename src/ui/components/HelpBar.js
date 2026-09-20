@@ -4,20 +4,20 @@ export class HelpBar {
   /**
    * Renders keyboard controls legend.
    * @param {Object} options
-   * @param {boolean} [options.isSearching=false]
+   * @param {string} [options.promptHelp='']
    * @param {number} [width=80]
    * @returns {string[]} Lines of rendered text
    */
-  static render({ isSearching = false }, width = 80) {
+  static render({ promptHelp = '' }, width = 80) {
     const lines = [];
     const border = `${ANSI.FG_CYAN}${'-'.repeat(width)}${ANSI.RESET}`;
     lines.push(border);
 
-    if (isSearching) {
+    if (promptHelp) {
       lines.push(
-        ` ${ANSI.BOLD}Type query${ANSI.RESET} | ${ANSI.BOLD}[Enter]${ANSI.RESET} Submit | ${ANSI.BOLD}[Esc]${ANSI.RESET} Cancel`
+        ` ${ANSI.BOLD}${promptHelp}${ANSI.RESET} | ${ANSI.BOLD}[Enter]${ANSI.RESET} Submit | ${ANSI.BOLD}[Esc]${ANSI.RESET} Cancel`
       );
-    lines.push(`${ANSI.FG_CYAN}${'='.repeat(width)}${ANSI.RESET}`);
+      lines.push(`${ANSI.FG_CYAN}${'='.repeat(width)}${ANSI.RESET}`);
       return lines;
     }
 
