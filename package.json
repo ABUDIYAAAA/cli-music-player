@@ -1,0 +1,32 @@
+{
+  "name": "cli-music-player",
+  "version": "1.0.0",
+  "description": "A production-quality terminal music player for macOS built with Node.js and afplay",
+  "main": "src/index.js",
+  "bin": {
+    "cli-music-player": "src/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ABUDIYAAAA/cli-music-player.git"
+  },
+  "keywords": [
+    "cli",
+    "music",
+    "player",
+    "terminal",
+    "afplay",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ABUDIYAAAA/cli-music-player/issues"
+  },
+  "homepage": "https://github.com/ABUDIYAAAA/cli-music-player#readme"
+}
