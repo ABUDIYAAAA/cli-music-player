@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import { spawn, execFile, execSync } from 'child_process';
+import fs from 'fs';
 import { PlaybackState } from './PlaybackState.js';
 import {
   DEFAULT_VOLUME,
@@ -40,6 +41,12 @@ export class AudioPlayer extends EventEmitter {
   play(song, startPos = 0) {
     if (!song || !song.path) {
       this.emit('error', new Error('Invalid song provided for playback'));
+      return;
+    }
+
+    if (!fs.existsSync(song.path)) {
+      this.state = PlaybackState.STOPPED;
+      this.emit('error', new Error(`File missing from disk: "${song.title || song.filename}"`));
       return;
     }
 

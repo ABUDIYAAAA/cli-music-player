@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import { PlaylistRepository } from './PlaylistRepository.js';
 import { Song } from '../library/Song.js';
 
@@ -79,11 +81,12 @@ export class PlaylistManager {
    * @returns {boolean}
    */
   addSongToPlaylist(playlistName, song) {
-    if (!song || !song.id) return false;
+    if (!song || (!song.id && !song.path)) return false;
+    const targetId = song.path || song.id;
     const list = this.playlists.get(playlistName);
     if (!list) return false;
-    if (!list.includes(song.id)) {
-      list.push(song.id);
+    if (!list.includes(targetId)) {
+      list.push(targetId);
       this.save();
       return true;
     }
@@ -109,7 +112,7 @@ export class PlaylistManager {
   }
 
   /**
-   * Resolves songs for a playlist given full library songs.
+   * Resolves songs for a playlist given full library songs or from disk.
    * @param {string} playlistName
    * @param {Song[]} allSongs
    * @returns {Song[]}
@@ -127,6 +130,14 @@ export class PlaylistManager {
     for (const idOrPath of songIds) {
       if (songMap.has(idOrPath)) {
         result.push(songMap.get(idOrPath));
+      } else if (fs.existsSync(idOrPath)) {
+        const filename = path.basename(idOrPath);
+        const song = new Song({
+          id: idOrPath,
+          path: idOrPath,
+          filename
+        });
+        result.push(song);
       }
     }
     return result;
@@ -138,7 +149,7 @@ export class PlaylistManager {
    * @returns {boolean} New favorite state
    */
   toggleFavorite(songOrId) {
-    const id = typeof songOrId === 'string' ? songOrId : songOrId?.id;
+    const id = typeof songOrId === 'string' ? songOrId : (songOrId?.path || songOrId?.id);
     if (!id) return false;
 
     let isFav;
@@ -159,15 +170,38 @@ export class PlaylistManager {
    * @returns {boolean}
    */
   isFavorite(songId) {
+    if (!songId) return false;
     return this.favorites.has(songId);
   }
 
   /**
-   * Resolves all favorite songs from full library.
+   * Resolves all favorite songs from full library or from disk.
    * @param {Song[]} allSongs
    * @returns {Song[]}
    */
   getFavoriteSongs(allSongs = []) {
-    return allSongs.filter((song) => this.favorites.has(song.id));
+    const songMap = new Map();
+    for (const s of allSongs) {
+      if (s) {
+        if (s.id) songMap.set(s.id, s);
+        if (s.path) songMap.set(s.path, s);
+      }
+    }
+
+    const result = [];
+    for (const idOrPath of this.favorites) {
+      if (songMap.has(idOrPath)) {
+        result.push(songMap.get(idOrPath));
+      } else if (fs.existsSync(idOrPath)) {
+        const filename = path.basename(idOrPath);
+        const song = new Song({
+          id: idOrPath,
+          path: idOrPath,
+          filename
+        });
+        result.push(song);
+      }
+    }
+    return result;
   }
 }
