@@ -3,7 +3,6 @@ export const MIN_VOLUME = 0;
 export const MAX_VOLUME = 100;
 export const VOLUME_STEP = 5;
 
-export const SEEK_STEP_SECONDS = 10;
 export const MAX_HISTORY_SIZE = 20;
 
 export const SUPPORTED_EXTENSIONS = [

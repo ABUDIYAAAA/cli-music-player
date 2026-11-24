@@ -29,10 +29,9 @@ export class HelpBar {
       `${ANSI.BOLD}[N/P]${ANSI.RESET} Next/Prev`;
 
     const row2 =
-      ` ${ANSI.BOLD}[←/→]${ANSI.RESET} Seek     ` +
-      `${ANSI.BOLD}[+/-]${ANSI.RESET} Volume ` +
+      ` ${ANSI.BOLD}[+/-]${ANSI.RESET} Volume   ` +
       `${ANSI.BOLD}[S]${ANSI.RESET} Shuffle       ` +
-      `${ANSI.BOLD}[R]${ANSI.RESET} Repeat ` +
+      `${ANSI.BOLD}[R]${ANSI.RESET} Repeat         ` +
       `${ANSI.BOLD}[/]${ANSI.RESET} Search`;
 
     const row3 =

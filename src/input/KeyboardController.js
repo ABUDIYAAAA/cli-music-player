@@ -104,12 +104,6 @@ export class KeyboardController extends EventEmitter {
       case 'space':
         this.emit('action', { type: 'TOGGLE_PLAYBACK' });
         break;
-      case 'left':
-        this.emit('action', { type: 'SEEK_BACKWARD' });
-        break;
-      case 'right':
-        this.emit('action', { type: 'SEEK_FORWARD' });
-        break;
       case 'tab':
         this.emit('action', { type: 'CYCLE_VIEW' });
         break;

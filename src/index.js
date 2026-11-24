@@ -23,11 +23,11 @@ Examples:
 
 Controls:
   [↑ / ↓] Navigation         [Enter] Play Selected      [Space] Pause / Resume
-  [← / →] Seek (10s)         [N] Next Track             [P] Previous Track
+  [N] Next Track             [P] Previous Track         [X] Stop Playback
   [+] / [-] Volume           [S] Toggle Shuffle         [R] Toggle Repeat
   [/] Search Songs           [F] Toggle Favorite        [Tab / 1-4] Switch Views
   [A] Add to Playlist        [C] Create Playlist        [D] Delete Playlist/Song
-  [X] Stop Playback          [Q] Quit
+  [O] Open Directory         [Q] Quit
 `);
 }
 

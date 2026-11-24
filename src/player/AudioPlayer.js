@@ -36,9 +36,8 @@ export class AudioPlayer extends EventEmitter {
   /**
    * Starts playing a song.
    * @param {import('../library/Song.js').Song} song
-   * @param {number} [startPos=0]
    */
-  play(song, startPos = 0) {
+  play(song) {
     if (!song || !song.path) {
       this.emit('error', new Error('Invalid song provided for playback'));
       return;
@@ -52,8 +51,8 @@ export class AudioPlayer extends EventEmitter {
 
     this.currentSong = song;
     this.duration = song.duration || 0;
-    this.currentPosition = startPos;
-    this._spawnPlayerProcess(startPos);
+    this.currentPosition = 0;
+    this._spawnPlayerProcess(0);
   }
 
   /**
@@ -172,24 +171,6 @@ export class AudioPlayer extends EventEmitter {
     this.duration = 0;
     this.state = PlaybackState.STOPPED;
     this.emit('stateChange', this.state);
-  }
-
-  /**
-   * Seeks forward or backward within current track.
-   * @param {number} secondsDelta
-   */
-  seek(secondsDelta) {
-    if (this.state === PlaybackState.STOPPED || !this.currentSong) {
-      return;
-    }
-
-    const targetPos = this.currentPosition + secondsDelta;
-    this.currentPosition = Math.max(0, Math.min(this.duration > 0 ? this.duration : targetPos, targetPos));
-    this.emit('timeUpdate', this.currentPosition);
-
-    if (this._hasFfplay && this.currentSong && this.state !== PlaybackState.STOPPED) {
-      this._spawnPlayerProcess(this.currentPosition);
-    }
   }
 
   /**

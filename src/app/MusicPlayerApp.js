@@ -11,7 +11,6 @@ import { PlaybackState } from '../player/PlaybackState.js';
 import {
   VIEW_MODES,
   REPEAT_MODES,
-  SEEK_STEP_SECONDS,
   VOLUME_STEP
 } from '../utils/constants.js';
 import { formatTime } from '../utils/formatTime.js';
@@ -213,14 +212,6 @@ export class MusicPlayerApp {
         break;
       case 'PREVIOUS_TRACK':
         this.previousTrack();
-        break;
-      case 'SEEK_FORWARD':
-        this.player.seek(SEEK_STEP_SECONDS);
-        this.showNotification(`Seek: ${formatTime(this.player.currentPosition)}`);
-        break;
-      case 'SEEK_BACKWARD':
-        this.player.seek(-SEEK_STEP_SECONDS);
-        this.showNotification(`Seek: ${formatTime(this.player.currentPosition)}`);
         break;
       case 'VOLUME_UP':
         this.player.setVolume(this.player.volume + VOLUME_STEP);

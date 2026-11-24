@@ -11,7 +11,7 @@ It scans a specified directory for audio files, displays an interactive keyboard
 - **Audio File Scanning**: Recursively scans directories for supported audio formats (`.mp3`, `.m4a`, `.wav`, `.aac`, `.aiff`, `.flac`).
 - **Interactive Terminal UI**: Tabbed interface featuring Library, Playlists, Favorites, and Recently Played History views with zero flicker.
 - **Full Playback Controls**: Play, Pause, Resume, Stop, Next Track, Previous Track.
-- **Volume & Seeking**: Real-time volume control and seek forward/backward (10s intervals).
+- **Volume Control**: Real-time volume control (5% intervals).
 - **Progress Display**: Visual playback progress bar with track timestamp formatting (`MM:SS` / `HH:MM:SS`).
 - **Shuffle & Repeat Modes**: True Fisher-Yates array shuffling without track repetition, plus repeat modes (`OFF`, `ONE`, `ALL`).
 - **Search & Filtering**: Live case-insensitive search by song title, artist, album, or filename.
@@ -74,7 +74,6 @@ node src/index.js --version
 | **`x`** | Stop playback |
 | **`N` / `n`** | Next song |
 | **`P` / `p`** | Previous song |
-| **`→` / `←`** | Seek forward / backward (10 seconds) |
 | **`+` / `-`** | Volume up / volume down (5% increments) |
 | **`S` / `s`** | Toggle Shuffle (ON / OFF) |
 | **`R` / `r`** | Cycle Repeat mode (OFF / ONE / ALL) |
@@ -161,7 +160,7 @@ npm test
 - **`Song`**: Tests model creation, fallbacks, artist formatting, and required field validation.
 - **`FileScanner`**: Tests directory traversal, sorting, and error boundaries for missing paths.
 - **`MusicLibrary`**: Tests collection management and case-insensitive multi-field search.
-- **`AudioPlayer`**: Tests state transitions, volume clamping, and seek position clamping.
+- **`AudioPlayer`**: Tests state transitions and volume clamping.
 - **`PlaylistManager`**: Tests playlist CRUD operations, song binding, and favorites toggle.
 - **`PlaybackHistory`**: Tests history queuing, unshifting, max size limits, and consecutive duplicate prevention.
 - **`KeyboardController`**: Tests keypress-to-semantic-action translation and search input buffering.
